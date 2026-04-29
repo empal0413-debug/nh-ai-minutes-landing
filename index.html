@@ -1,12 +1,12 @@
- <!doctype html>
- <html lang="ko">
- <head>
-   <meta charset="UTF-8" />
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>NH AI회의록 | 2026년 4월 30일 정식 오픈</title>
-  <meta name="description" content="NH AI회의록 정식 오픈. 모바일에서 녹음 시작, 업로드, 재전송, 회의록 확인까지 한 번에." />
-   <style>
-     :root {
+  <title>NH AI회의록 | 회의록 OFF, 휴식 ON</title>
+  <meta name="description" content="회의 후 정리는 AI에게 맡기고, 오늘은 나를 휴식하세요. NH AI회의록 정식 오픈 안내." />
+  <style>
+    :root {
       --bg: #f3f7ff;
       --surface: rgba(255,255,255,0.82);
       --surface-soft: #f7fbff;
@@ -20,418 +20,117 @@
       --radius-xl: 24px;
       --shadow: 0 18px 45px rgba(26, 73, 151, 0.16);
       --glow: 0 16px 40px rgba(31, 124, 255, 0.22);
-     }
- 
-     * { box-sizing: border-box; }
-
-    .bg-orb {
-      position: fixed;
-      inset: auto;
-      width: 320px;
-      height: 320px;
-      filter: blur(60px);
-      opacity: .45;
-      z-index: -1;
-      pointer-events: none;
     }
+    * { box-sizing: border-box; }
+    .bg-orb { position: fixed; inset: auto; width: 320px; height: 320px; filter: blur(60px); opacity: .45; z-index: -1; pointer-events: none; }
     .bg-orb.one { top: -80px; left: -60px; background: #70b7ff; }
     .bg-orb.two { top: 28%; right: -90px; background: #82f4df; }
     .bg-orb.three { bottom: 8%; left: 18%; background: #b4c7ff; }
- 
-     html, body {
-       margin: 0;
-       font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-       color: var(--text);
-      background:
-        radial-gradient(circle at 0% 0%, #dbe9ff 0, transparent 42%),
-        radial-gradient(circle at 100% 10%, #d7fbf6 0, transparent 40%),
-        var(--bg);
-      line-height: 1.55;
-     }
- 
-     .container {
-      width: min(100% - 1.25rem, 980px);
-       margin: 0 auto;
-     }
- 
-     .hero {
-      padding: max(1.3rem, env(safe-area-inset-top)) 0 1.2rem;
-       display: grid;
-      gap: .95rem;
-    }
-
-    .hero-copy,
-    .hero-phone,
-    .section {
-      background: var(--surface);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-copy {
-      padding: 1.1rem;
-     }
- 
-     .badge {
-       display: inline-flex;
-       align-items: center;
-      gap: .4rem;
-      padding: .42rem .72rem;
-       border-radius: 999px;
-      border: 1px solid #bfd9ff;
-      background: #ebf4ff;
-      color: var(--primary-strong);
-      font-size: .82rem;
-      font-weight: 700;
-     }
- 
-     h1 {
-      margin: .75rem 0 .65rem;
-      font-size: clamp(1.55rem, 8vw, 2.1rem);
-      line-height: 1.26;
-      letter-spacing: -.01em;
-     }
- 
+    html, body { margin: 0; font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); background: radial-gradient(circle at 0% 0%, #dbe9ff 0, transparent 42%), radial-gradient(circle at 100% 10%, #d7fbf6 0, transparent 40%), var(--bg); line-height: 1.55; }
+    .container { width: min(100% - 1.25rem, 980px); margin: 0 auto; }
+    .hero { padding: max(1.3rem, env(safe-area-inset-top)) 0 1.2rem; display: grid; gap: .95rem; }
+    .hero-copy,.hero-phone,.section { background: var(--surface); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: var(--radius-xl); box-shadow: var(--shadow); }
+    .hero-copy { padding: 1.1rem; }
+    .badge { display: inline-flex; align-items: center; gap: .4rem; padding: .42rem .72rem; border-radius: 999px; border: 1px solid #bfd9ff; background: #ebf4ff; color: var(--primary-strong); font-size: .82rem; font-weight: 700; }
+    h1 { margin: .75rem 0 .65rem; font-size: clamp(1.55rem, 8vw, 2.1rem); line-height: 1.26; letter-spacing: -.01em; }
     .accent { color: var(--primary); }
- 
-    .hero p {
-      margin: 0;
-       color: var(--muted);
-      font-size: .96rem;
-     }
- 
-     .hero-actions {
-      margin-top: .95rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: .55rem;
-     }
- 
-     .btn {
-      min-height: 46px;
-       display: inline-flex;
-       align-items: center;
-      justify-content: center;
-       border-radius: 999px;
-       text-decoration: none;
-      font-weight: 700;
-      padding: .78rem 1rem;
-       border: 1px solid transparent;
-      font-size: .94rem;
-     }
- 
-     .btn.primary {
-      color: #fff;
-      background: linear-gradient(120deg, #1f7cff, #2b9dff);
-      box-shadow: var(--glow);
-      letter-spacing: -.01em;
-     }
- 
-    .btn.soft {
-      background: #fff;
-      border-color: #bfd9ff;
-      color: var(--primary-strong);
-     }
- 
-    .hero-phone {
-      padding: .72rem;
-      background: linear-gradient(180deg, #f9fcff, #eef5ff);
-     }
- 
-    .phone-screen {
-      border: 1px solid #ddeafb;
-      border-radius: 18px;
-      background: #fff;
-      padding: .9rem;
-     }
- 
-    .phone-header {
-      display: flex;
-      justify-content: space-between;
-      color: #7a8ea9;
-      font-size: .8rem;
-      font-weight: 700;
-     }
- 
-    .phone-title {
-      margin: .9rem 0 .45rem;
-      font-size: 1.24rem;
-      line-height: 1.35;
-      color: var(--primary-strong);
-     }
- 
-    .phone-desc {
-      margin: 0;
-      color: #596d8c;
-      font-size: .92rem;
-     }
- 
-    .pill {
-      display: inline-flex;
-      margin-top: .9rem;
-      padding: .5rem .8rem;
-      border-radius: 999px;
-      border: 1px solid #c7ddff;
-      background: #f4f9ff;
-      color: #1e61c0;
-      font-size: .83rem;
-      font-weight: 700;
-     }
- 
-    .section {
-      margin-top: .9rem;
-      padding: 1.05rem;
-     }
- 
-    .section h2 {
-       margin: 0;
-      font-size: 1.3rem;
-      line-height: 1.35;
-     }
- 
-    .lead {
-      margin: .45rem 0 0;
-      color: var(--muted);
-      font-size: .93rem;
-     }
- 
-    .grid,
-    .flow,
-     .path {
-      margin-top: .82rem;
-       display: grid;
-      grid-template-columns: 1fr;
-      gap: .65rem;
-     }
- 
-    .card,
-    .flow-item {
-       border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--surface-soft);
-      padding: .86rem;
-     }
- 
-    .card h3,
-    .flow-item strong {
-      margin: 0 0 .24rem;
-      font-size: .98rem;
-     }
- 
-    .card p,
-    .flow-item p {
-       margin: 0;
-       color: var(--muted);
-      font-size: .9rem;
-      line-height: 1.5;
-     }
- 
-    .step {
-      display: inline-block;
-      margin-bottom: .35rem;
-      font-size: .75rem;
-       font-weight: 700;
-       border-radius: 999px;
-      padding: .2rem .56rem;
-      color: #1d62c2;
-      border: 1px solid #cae0ff;
-      background: #ecf5ff;
-    }
-
-
-    .shot-grid {
-      margin-top: .82rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: .75rem;
-    }
-
-    .shot {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: linear-gradient(180deg, #ffffff, #f8fbff);
-      padding: .65rem;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .shot img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 12px;
-      border: 1px solid #e4eefc;
-      aspect-ratio: 9/16;
-      object-fit: cover;
-    }
-
-    .shot figcaption {
-      margin-top: .45rem;
-      font-size: .86rem;
-      color: var(--muted);
-    }
-
-    .shot:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--glow);
-      letter-spacing: -.01em;
-    }
-
-    .warn {
-      margin-top: .8rem;
-      border-left: 4px solid var(--danger);
-      border-radius: 10px;
-      background: #fff5f8;
-      color: #5d3440;
-      padding: .72rem .82rem;
-      font-size: .9rem;
-     }
- 
-    .footer-cta {
-      margin-top: .9rem;
-    }
- 
-    .floating-install {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: calc(12px + env(safe-area-inset-bottom));
-      width: min(100% - 1.25rem, 980px);
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .floating-install .btn {
-      pointer-events: auto;
-      width: 100%;
-      max-width: 560px;
-      border-radius: 14px;
-      min-height: 52px;
-      font-size: 1rem;
-      box-shadow: var(--glow);
-      letter-spacing: -.01em;
-    }
-
+    .hero p { margin: 0; color: var(--muted); font-size: .96rem; }
+    .hero-actions { margin-top: .95rem; display: grid; grid-template-columns: 1fr; gap: .55rem; }
+    .btn { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; text-decoration: none; font-weight: 700; padding: .78rem 1rem; border: 1px solid transparent; font-size: .94rem; }
+    .btn.primary { color: #fff; background: linear-gradient(120deg, #1f7cff, #2b9dff); box-shadow: var(--glow); letter-spacing: -.01em; }
+    .btn.soft { background: #fff; border-color: #bfd9ff; color: var(--primary-strong); }
+    .hero-phone { padding: .72rem; background: linear-gradient(180deg, #f9fcff, #eef5ff); }
+    .phone-screen { border: 1px solid #ddeafb; border-radius: 18px; background: #fff; padding: .9rem; }
+    .phone-header { display: flex; justify-content: space-between; color: #7a8ea9; font-size: .8rem; font-weight: 700; }
+    .phone-title { margin: .9rem 0 .45rem; font-size: 1.24rem; line-height: 1.35; color: var(--primary-strong); }
+    .phone-desc { margin: 0; color: #596d8c; font-size: .92rem; }
+    .pill { display: inline-flex; margin-top: .9rem; padding: .5rem .8rem; border-radius: 999px; border: 1px solid #c7ddff; background: #f4f9ff; color: #1e61c0; font-size: .83rem; font-weight: 700; }
+    .section { margin-top: .9rem; padding: 1.05rem; }
+    .section h2 { margin: 0; font-size: 1.3rem; line-height: 1.35; }
+    .lead { margin: .45rem 0 0; color: var(--muted); font-size: .93rem; }
+    .grid,.path { margin-top: .82rem; display: grid; grid-template-columns: 1fr; gap: .65rem; }
+    .card,.shot { border: 1px solid var(--line); border-radius: 14px; background: var(--surface-soft); padding: .86rem; }
+    .card h3 { margin: 0 0 .24rem; font-size: .98rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+    .shot-grid { margin-top: .82rem; display: grid; grid-template-columns: 1fr; gap: .75rem; }
+    .shot { background: linear-gradient(180deg, #ffffff, #f8fbff); padding: .65rem; transition: transform .2s ease, box-shadow .2s ease; }
+    .step { display: inline-block; margin-bottom: .35rem; font-size: .75rem; font-weight: 700; border-radius: 999px; padding: .2rem .56rem; color: #1d62c2; border: 1px solid #cae0ff; background: #ecf5ff; }
+    .shot img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid #e4eefc; aspect-ratio: 9/16; object-fit: cover; }
+    .shot figcaption { margin-top: .45rem; font-size: .86rem; color: var(--muted); }
+    .shot:hover { transform: translateY(-3px); box-shadow: var(--glow); }
+    .warn { margin-top: .8rem; border-left: 4px solid var(--danger); border-radius: 10px; background: #fff5f8; color: #5d3440; padding: .72rem .82rem; font-size: .9rem; }
+    .footer-cta { margin-top: .9rem; }
+    .floating-install { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(12px + env(safe-area-inset-bottom)); width: min(100% - 1.25rem, 980px); z-index: 1000; display: flex; justify-content: center; pointer-events: none; }
+    .floating-install .btn { pointer-events: auto; width: 100%; max-width: 560px; border-radius: 14px; min-height: 52px; font-size: 1rem; box-shadow: var(--glow); }
     body { padding-bottom: 88px; }
-
-     footer {
-      padding: 1.2rem 0 2rem;
-       text-align: center;
-      color: #607291;
-      font-size: .86rem;
-     }
- 
-    @media (min-width: 680px) {
-      .hero-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid,
-      .path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .shot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (min-width: 980px) {
-      .hero {
-        grid-template-columns: 1.04fr .96fr;
-        padding-top: 2.2rem;
-      }
-
-      .hero-copy,
-      .hero-phone,
-      .section { padding: 1.3rem; }
- 
-      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .shot-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-     }
-   </style>
- </head>
- <body>
-  <span class="bg-orb one" aria-hidden="true"></span>
-  <span class="bg-orb two" aria-hidden="true"></span>
-  <span class="bg-orb three" aria-hidden="true"></span>
-  <main class="container">
-    <section class="hero" id="top">
-      <article class="hero-copy">
-        <span class="badge">✨ 2026년 4월 30일(목) 정식 오픈</span>
-      <h1>NH AI회의록으로<br><span class="accent">회의록 완성까지 한 번에</span></h1>
-        <p>
-          녹음 시작 → 업로드 → 회의록 요약 및 수정까지 한 번에 이어지는 사용 경험을 제공합니다. 
-         </p>
-         <div class="hero-actions">
-          <a class="btn primary" href="#flow">앱 사용 흐름 보기</a>
-          <a class="btn soft" href="#install">설치/접속 경로</a>
-         </div>
-      </article>
-
-      <aside class="hero-phone" aria-label="모바일 화면 요약">
-        <div class="phone-screen">
-          <div class="phone-header"><span>사용 방법</span><span>NH AI회의록</span></div>
-          <h2 class="phone-title"> 앱 녹음 → PC자동업로드 → 회의록 요약</h2>
-          <p class="phone-desc">권한 허용 후 녹음을 시작하면 업로드까지 자동 연결되며, 최근회의록에서 재전송할 수 있습니다.</p>
-          <span class="pill">🎙️ 녹음시작 버튼으로 즉시 시작</span>
-         </div>
-      </aside>
-     </section>
- 
-    <section class="section" id="benefits">
-      <h2>핵심 이점</h2>
-      <p class="lead">중앙본부와 영업점의 실제 업무 방식에 맞춰 회의록 작성 시간을 줄이고, 핵심만 빠르게 공유할 수 있도록 설계했습니다.</p>
-      <div class="grid">
-        <article class="card">
-          <h3>1) 장점1. 대량 회의 처리</h3>
-          <p>수많은 회의를 앱 녹음으로 간단히 수집하고, PC웹에서 STT 변환 내용 확인·회의록 요약·수정·참여자 공람까지 한 번에 처리할 수 있습니다.</p>
-         </article>
-        <article class="card">
-          <h3>2) 장점2: 수기 대비 시간 절감</h3>
-          <p>기존 수기 방식 회의록 작성 대비 반복 입력과 정리 시간을 크게 줄여, 담당자의 실무 시간을 획기적으로 절감합니다.</p>
-         </article>
-        <article class="card">
-          <h3>3) 장점3: 화상회의 핵심 요약</h3>
-          <p>중요 화상회의 녹화파일을 업로드해 핵심만 요약된 형태로 회의록을 활용할 수 있습니다.</p>
-         </article>
-       </div>
-     </section>
- 
-    <section class="section" id="flow">
-      <h2>앱 화면 기준 사용 흐름</h2>
-      <p class="lead">앱을 통해 간단하게 녹음을 진행할 수 있습니다.</p>
-      <div class="shot-grid">
-        <figure class="shot"><img src="./assets/flow-01-splash.jpg" alt="STEP 01 스플래시/접속중 화면" loading="lazy" /><figcaption><span class="step">STEP 01</span> 스플래시/접속중</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-02-permission.jpg" alt="STEP 02 앱 접근권한 허용 안내 화면" loading="lazy" /><figcaption><span class="step">STEP 02</span> 앱 접근권한 안내</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-05-permission-error.jpg" alt="STEP 03 권한 미허용 예외 화면" loading="lazy" /><figcaption><span class="step">STEP 03</span> 권한 미허용 예외</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-04-record-start.jpg" alt="STEP 04 녹음시작 화면" loading="lazy" /><figcaption><span class="step">STEP 04</span> 녹음시작 화면</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-08-recording.jpg" alt="STEP 05 녹음중 화면" loading="lazy" /><figcaption><span class="step">STEP 05</span> 녹음중 화면</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-11-stop-confirm.jpg" alt="STEP 06 녹음종료 확인 모달" loading="lazy" /><figcaption><span class="step">STEP 06</span> 녹음종료 확인모달</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-06-fail-list.jpg" alt="STEP 07 최근회의록 및 실패목록 화면" loading="lazy" /><figcaption><span class="step">STEP 07</span> 최근회의록 / 실패목록</figcaption></figure>
+    footer { padding: 1.2rem 0 2rem; text-align: center; color: #607291; font-size: .86rem; }
+    @media (min-width: 680px) { .hero-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid,.path,.shot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 980px) { .hero { grid-template-columns: 1.04fr .96fr; padding-top: 2.2rem; } .hero-copy,.hero-phone,.section { padding: 1.3rem; } .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .shot-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  </style>
+</head>
+<body>
+<span class="bg-orb one" aria-hidden="true"></span>
+<span class="bg-orb two" aria-hidden="true"></span>
+<span class="bg-orb three" aria-hidden="true"></span>
+<main class="container">
+  <section class="hero" id="top">
+    <article class="hero-copy">
+      <span class="badge">✨ 2026년 4월 30일(목) 정식 오픈</span>
+      <h1>회의록 <span class="accent">OFF</span>, 휴식 <span class="accent">ON</span></h1>
+      <p>회의 후 정리는 AI에게 맡기고, 오늘은 나를 휴식하세요. 녹음부터 요약까지 NH AI회의록이 자연스럽게 이어줍니다.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#install">지금 다운로드하기</a>
+        <a class="btn soft" href="#flow">앱 사용 흐름 보기</a>
       </div>
-      <div class="warn"><strong>유의사항:</strong> 앱을 통해 녹음만 진행하며, 세부 수정 및 요약은 PC웹에서 진행</div>
-    </section>
- 
-    <section class="section" id="install">
-      <h2>접속/설치 경로</h2>
-      <p class="lead">앱을 통해 녹음 후 웹에서 회의록을 요약하는 흐름으로 연결됩니다.</p>
-       <div class="path">
-        <article class="card">
-          <h3>🌐 웹 경로</h3>
-           <p>통합로그인 &gt; 사무관리 &gt; [은행] AI회의록</p>
-         </article>
-        <article class="card">
-          <h3>📱 앱 경로</h3>
-           <p>태블릿 브랜치 &gt; NHbank앱스토어 설치 &gt; NH AI회의록 설치 및 실행</p>
-         </article>
-       </div>
-      <div class="footer-cta">
-        <p class="lead">아래 플로팅 버튼으로 언제든 설치 페이지로 이동할 수 있습니다.</p>
+    </article>
+    <aside class="hero-phone" aria-label="모바일 화면 요약">
+      <div class="phone-screen">
+        <div class="phone-header"><span>오픈 캠페인</span><span>NH AI회의록</span></div>
+        <h2 class="phone-title">AI회의록 오픈 기념<br>웰니스 콘셉트 안내</h2>
+        <p class="phone-desc">업무 효율은 높이고 피로는 낮추는 방향으로 안내 문구를 재정리했습니다. 메인 CTA에서 즉시 설치 경로로 이동할 수 있습니다.</p>
+        <span class="pill">🧘 회의록 자동화로 실무 휴식 확보</span>
       </div>
-     </section>
-   </main>
- 
-  <div class="floating-install">
-    <a class="btn primary" href="https://mdmnb.nonghyup.com/download/" target="_blank" rel="noopener noreferrer">지금 바로 설치하기 →</a>
-  </div>
+    </aside>
+  </section>
 
-  <footer class="container">NH AI회의록 · 안내페이지</footer>
- </body>
- </html>
+  <section class="section" id="benefits">
+    <h2>핵심 메시지</h2>
+    <p class="lead">포스터 콘셉트에 맞춰 '자동화·휴식·속도'를 중심으로 사용자 공감형 카피를 강화했습니다.</p>
+    <div class="grid">
+      <article class="card"><h3>1) 회의록 OFF</h3><p>회의 직후 반복되는 정리 작업은 AI에게 맡기고, 담당자는 핵심 의사결정과 후속 실행에 집중할 수 있습니다.</p></article>
+      <article class="card"><h3>2) 휴식 ON</h3><p>수기 작성 대비 회의록 제작 시간을 줄여 숨 고를 시간을 확보하고, 팀의 업무 리듬을 안정적으로 유지합니다.</p></article>
+      <article class="card"><h3>3) 접속은 간단하게</h3><p>PC·APP 경로를 분리해 명확하게 제시하고, 최하단 고정 버튼으로 즉시 다운로드 동선을 제공합니다.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="flow">
+    <h2>앱 화면 기준 사용 흐름</h2>
+    <p class="lead">권한 허용 → 녹음 → 업로드 → 최근회의록 확인까지 한눈에 확인할 수 있도록 구조를 정돈했습니다.</p>
+    <div class="shot-grid">
+      <figure class="shot"><img src="./assets/flow-01-splash.jpg" alt="STEP 01 스플래시/접속중 화면" loading="lazy" /><figcaption><span class="step">STEP 01</span> 스플래시/접속중</figcaption></figure>
+      <figure class="shot"><img src="./assets/flow-02-permission.jpg" alt="STEP 02 앱 접근권한 허용 안내 화면" loading="lazy" /><figcaption><span class="step">STEP 02</span> 앱 접근권한 안내</figcaption></figure>
+      <figure class="shot"><img src="./assets/flow-05-permission-error.jpg" alt="STEP 03 권한 미허용 예외 화면" loading="lazy" /><figcaption><span class="step">STEP 03</span> 권한 미허용 예외</figcaption></figure>
+      <figure class="shot"><img src="./assets/flow-04-record-start.jpg" alt="STEP 04 녹음시작 화면" loading="lazy" /><figcaption><span class="step">STEP 04</span> 녹음시작 화면</figcaption></figure>
+      <figure class="shot"><img src="./assets/flow-08-recording.jpg" alt="STEP 05 녹음중 화면" loading="lazy" /><figcaption><span class="step">STEP 05</span> 녹음중 화면</figcaption></figure>
+      <figure class="shot"><img src="./assets/flow-11-stop-confirm.jpg" alt="STEP 06 녹음종료 확인 모달" loading="lazy" /><figcaption><span class="step">STEP 06</span> 녹음종료 확인모달</figcaption></figure>
+      <figure class="shot"><img src="./assets/flow-06-fail-list.jpg" alt="STEP 07 최근회의록 및 실패목록 화면" loading="lazy" /><figcaption><span class="step">STEP 07</span> 최근회의록 / 실패목록</figcaption></figure>
+    </div>
+    <div class="warn"><strong>유의사항:</strong> 앱에서는 녹음 중심으로 사용하고, 상세 편집·최종 공유는 PC 웹에서 진행하세요.</div>
+  </section>
+
+  <section class="section" id="install">
+    <h2>설치/접속 가이드</h2>
+    <p class="lead">포스터의 다운로드 유도 흐름을 반영해, 어디서 접속해야 하는지 명확한 경로 안내를 제공합니다.</p>
+    <div class="path">
+      <article class="card"><h3>💻 PC 경로</h3><p>통합로그인 &gt; 사무관리 &gt; [은행] AI 회의록</p></article>
+      <article class="card"><h3>📱 APP 경로</h3><p>태블릿브랜치 &gt; NHbank앱스토어 &gt; NH AI회의록 설치</p></article>
+    </div>
+    <div class="footer-cta"><p class="lead">하단 고정 버튼(지금 다운로드)으로 설치 페이지에 바로 이동할 수 있습니다.</p></div>
+  </section>
+</main>
+<div class="floating-install">
+  <a class="btn primary" href="https://mdmnb.nonghyup.com/download/" target="_blank" rel="noopener noreferrer">지금 다운로드 →</a>
+</div>
+<footer class="container">NH AI회의록 · 안내페이지</footer>
+</body>
+</html>
