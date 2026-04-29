@@ -3,7 +3,7 @@
  <head>
    <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>NH AI회의록 | 2026년 4월 27일 정식 오픈</title>
+  <title>NH AI회의록 | 2026년 4월 30일 정식 오픈</title>
   <meta name="description" content="NH AI회의록 정식 오픈. 모바일에서 녹음 시작, 업로드, 재전송, 회의록 확인까지 한 번에." />
    <style>
      :root {
@@ -19,6 +19,7 @@
       --radius-lg: 18px;
       --radius-xl: 24px;
       --shadow: 0 12px 30px rgba(26, 73, 151, 0.12);
+      --glow: 0 16px 40px rgba(31, 124, 255, 0.22);
      }
  
      * { box-sizing: border-box; }
@@ -109,6 +110,7 @@
      .btn.primary {
       color: #fff;
       background: linear-gradient(120deg, #1f7cff, #2b9dff);
+      box-shadow: var(--glow);
      }
  
     .btn.soft {
@@ -222,6 +224,43 @@
       background: #ecf5ff;
     }
 
+
+    .shot-grid {
+      margin-top: .82rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .75rem;
+    }
+
+    .shot {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      padding: .65rem;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid #e4eefc;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+    }
+
+    .shot figcaption {
+      margin-top: .45rem;
+      font-size: .86rem;
+      color: var(--muted);
+    }
+
+    .shot:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--glow);
+    }
+
     .warn {
       margin-top: .8rem;
       border-left: 4px solid var(--danger);
@@ -236,6 +275,30 @@
       margin-top: .9rem;
     }
  
+    .floating-install {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      width: min(100% - 1.25rem, 980px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .floating-install .btn {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 560px;
+      border-radius: 14px;
+      min-height: 52px;
+      font-size: 1rem;
+      box-shadow: var(--glow);
+    }
+
+    body { padding-bottom: 88px; }
+
      footer {
       padding: 1.2rem 0 2rem;
        text-align: center;
@@ -247,7 +310,7 @@
       .hero-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .grid,
       .path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .shot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (min-width: 980px) {
@@ -261,6 +324,7 @@
       .section { padding: 1.3rem; }
  
       .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .shot-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
      }
    </style>
@@ -313,17 +377,18 @@
     <section class="section" id="flow">
       <h2>앱 화면 기준 사용 흐름</h2>
       <p class="lead">실제 운영에서 자주 발생하는 권한/업로드/종료 예외까지 포함했습니다.</p>
-      <div class="flow">
-        <article class="flow-item"><span class="step">STEP 01</span><strong>스플래시/접속중</strong><p>앱 실행 시 로고와 접속 상태 표시</p></article>
-        <article class="flow-item"><span class="step">STEP 02</span><strong>필수 권한 안내</strong><p>오디오·알림·전화 권한 허용</p></article>
-        <article class="flow-item"><span class="step">STEP 03</span><strong>업로드 진행 표시</strong><p>업로드 상태를 즉시 확인</p></article>
-        <article class="flow-item"><span class="step">STEP 04</span><strong>녹음시작 화면</strong><p>초기 사용자도 바로 시작 가능</p></article>
-        <article class="flow-item"><span class="step">STEP 05</span><strong>권한 미허용 예외</strong><p>상세설정 이동으로 즉시 복구</p></article>
-        <article class="flow-item"><span class="step">STEP 06</span><strong>최근회의록/실패목록</strong><p>실패 건만 빠르게 확인</p></article>
-        <article class="flow-item"><span class="step">STEP 07</span><strong>재전송 완료 알림</strong><p>토스트 메시지로 성공 확인</p></article>
-        <article class="flow-item"><span class="step">STEP 08</span><strong>녹음중/일시정지</strong><p>현재 상태를 명확하게 표시</p></article>
-        <article class="flow-item"><span class="step">STEP 09</span><strong>파일명 수정/저장</strong><p>업무 규칙에 맞게 회의명 정리</p></article>
-        <article class="flow-item"><span class="step">STEP 10</span><strong>종료 확인 모달</strong><p>실수 종료 방지를 위한 재확인</p></article>
+      <div class="shot-grid">
+        <figure class="shot"><img src="./assets/flow-01-splash" alt="STEP 01 스플래시/접속중 화면" loading="lazy" /><figcaption><span class="step">STEP 01</span> 스플래시/접속중</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-02-permission" alt="STEP 02 필수 권한 안내 화면" loading="lazy" /><figcaption><span class="step">STEP 02</span> 필수 권한 안내</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-03-uploading" alt="STEP 03 업로드 진행 화면" loading="lazy" /><figcaption><span class="step">STEP 03</span> 업로드 진행 표시</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-04-record-start" alt="STEP 04 녹음시작 화면" loading="lazy" /><figcaption><span class="step">STEP 04</span> 녹음시작 화면</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-05-permission-error" alt="STEP 05 권한 미허용 안내 화면" loading="lazy" /><figcaption><span class="step">STEP 05</span> 권한 미허용 예외</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-06-fail-list" alt="STEP 06 최근회의록 실패 목록 화면" loading="lazy" /><figcaption><span class="step">STEP 06</span> 최근회의록/실패목록</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-07-retry-done" alt="STEP 07 재전송 완료 토스트 화면" loading="lazy" /><figcaption><span class="step">STEP 07</span> 재전송 완료 알림</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-08-recording" alt="STEP 08 녹음중 화면" loading="lazy" /><figcaption><span class="step">STEP 08</span> 녹음중</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-09-paused" alt="STEP 09 일시정지 화면" loading="lazy" /><figcaption><span class="step">STEP 09</span> 일시정지</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-10-file-edit" alt="STEP 10 파일명 수정 화면" loading="lazy" /><figcaption><span class="step">STEP 10</span> 파일명 수정/저장</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-11-stop-confirm" alt="STEP 11 녹음 종료 확인 모달" loading="lazy" /><figcaption><span class="step">STEP 11</span> 종료 확인 모달</figcaption></figure>
       </div>
       <div class="warn"><strong>운영 포인트:</strong> 권한 미허용·업로드 실패·실수 종료 같은 현장 이슈를 사전 안내해 교육 비용을 줄일 수 있습니다.</div>
     </section>
@@ -342,11 +407,15 @@
          </article>
        </div>
       <div class="footer-cta">
-        <a class="btn primary" href="https://mdmnb.nonghyup.com/download/" target="_blank" rel="noopener noreferrer">지금 바로 설치하러 가기 →</a>
+        <p class="lead">아래 고정 버튼으로 언제든 설치 페이지로 이동할 수 있습니다.</p>
       </div>
      </section>
    </main>
  
+  <div class="floating-install">
+    <a class="btn primary" href="https://mdmnb.nonghyup.com/download/" target="_blank" rel="noopener noreferrer">지금 바로 설치하기 →</a>
+  </div>
+
   <footer class="container">NH AI회의록 · 모바일 최적화 안내 랜딩페이지</footer>
  </body>
  </html>
