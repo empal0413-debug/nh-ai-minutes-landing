@@ -7,8 +7,8 @@
   <meta name="description" content="NH AI회의록 정식 오픈. 모바일에서 녹음 시작, 업로드, 재전송, 회의록 확인까지 한 번에." />
    <style>
      :root {
-      --bg: #f4f8ff;
-      --surface: #fff;
+      --bg: #f3f7ff;
+      --surface: rgba(255,255,255,0.82);
       --surface-soft: #f7fbff;
       --line: #d9e8fb;
       --text: #0f2344;
@@ -18,11 +18,25 @@
       --danger: #de4768;
       --radius-lg: 18px;
       --radius-xl: 24px;
-      --shadow: 0 12px 30px rgba(26, 73, 151, 0.12);
+      --shadow: 0 18px 45px rgba(26, 73, 151, 0.16);
       --glow: 0 16px 40px rgba(31, 124, 255, 0.22);
      }
  
      * { box-sizing: border-box; }
+
+    .bg-orb {
+      position: fixed;
+      inset: auto;
+      width: 320px;
+      height: 320px;
+      filter: blur(60px);
+      opacity: .45;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .bg-orb.one { top: -80px; left: -60px; background: #70b7ff; }
+    .bg-orb.two { top: 28%; right: -90px; background: #82f4df; }
+    .bg-orb.three { bottom: 8%; left: 18%; background: #b4c7ff; }
  
      html, body {
        margin: 0;
@@ -50,6 +64,7 @@
     .hero-phone,
     .section {
       background: var(--surface);
+      backdrop-filter: blur(10px);
       border: 1px solid var(--line);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
@@ -111,6 +126,7 @@
       color: #fff;
       background: linear-gradient(120deg, #1f7cff, #2b9dff);
       box-shadow: var(--glow);
+      letter-spacing: -.01em;
      }
  
     .btn.soft {
@@ -259,6 +275,7 @@
     .shot:hover {
       transform: translateY(-3px);
       box-shadow: var(--glow);
+      letter-spacing: -.01em;
     }
 
     .warn {
@@ -295,6 +312,7 @@
       min-height: 52px;
       font-size: 1rem;
       box-shadow: var(--glow);
+      letter-spacing: -.01em;
     }
 
     body { padding-bottom: 88px; }
@@ -330,11 +348,14 @@
    </style>
  </head>
  <body>
+  <span class="bg-orb one" aria-hidden="true"></span>
+  <span class="bg-orb two" aria-hidden="true"></span>
+  <span class="bg-orb three" aria-hidden="true"></span>
   <main class="container">
     <section class="hero" id="top">
       <article class="hero-copy">
         <span class="badge">✨ 2026년 4월 27일(월) 정식 오픈</span>
-        <h1>모바일에서 시작해<br><span class="accent">회의록 완성까지 자동으로</span></h1>
+        <h1>모바일 퍼스트 경험으로<br><span class="accent">회의록 완성까지 한 번에</span></h1>
         <p>
           공유해주신 앱 화면 흐름을 기준으로,
           녹음 시작 → 업로드 → 실패 재전송 → 회의록 확인까지 한 번에 이어지는 사용 경험을 안내합니다.
@@ -376,19 +397,19 @@
  
     <section class="section" id="flow">
       <h2>앱 화면 기준 사용 흐름</h2>
-      <p class="lead">실제 운영에서 자주 발생하는 권한/업로드/종료 예외까지 포함했습니다.</p>
+      <p class="lead">실제 앱 스크린을 그대로 배치해, 사용자가 한눈에 흐름을 이해할 수 있도록 구성했습니다.</p>
       <div class="shot-grid">
-        <figure class="shot"><img src="./assets/flow-01-splash" alt="STEP 01 스플래시/접속중 화면" loading="lazy" /><figcaption><span class="step">STEP 01</span> 스플래시/접속중</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-02-permission" alt="STEP 02 필수 권한 안내 화면" loading="lazy" /><figcaption><span class="step">STEP 02</span> 필수 권한 안내</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-03-uploading" alt="STEP 03 업로드 진행 화면" loading="lazy" /><figcaption><span class="step">STEP 03</span> 업로드 진행 표시</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-04-record-start" alt="STEP 04 녹음시작 화면" loading="lazy" /><figcaption><span class="step">STEP 04</span> 녹음시작 화면</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-05-permission-error" alt="STEP 05 권한 미허용 안내 화면" loading="lazy" /><figcaption><span class="step">STEP 05</span> 권한 미허용 예외</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-06-fail-list" alt="STEP 06 최근회의록 실패 목록 화면" loading="lazy" /><figcaption><span class="step">STEP 06</span> 최근회의록/실패목록</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-07-retry-done" alt="STEP 07 재전송 완료 토스트 화면" loading="lazy" /><figcaption><span class="step">STEP 07</span> 재전송 완료 알림</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-08-recording" alt="STEP 08 녹음중 화면" loading="lazy" /><figcaption><span class="step">STEP 08</span> 녹음중</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-09-paused" alt="STEP 09 일시정지 화면" loading="lazy" /><figcaption><span class="step">STEP 09</span> 일시정지</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-10-file-edit" alt="STEP 10 파일명 수정 화면" loading="lazy" /><figcaption><span class="step">STEP 10</span> 파일명 수정/저장</figcaption></figure>
-        <figure class="shot"><img src="./assets/flow-11-stop-confirm" alt="STEP 11 녹음 종료 확인 모달" loading="lazy" /><figcaption><span class="step">STEP 11</span> 종료 확인 모달</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-01-splash.jpg" alt="STEP 01 스플래시/접속중 화면" loading="lazy" /><figcaption><span class="step">STEP 01</span> 스플래시/접속중</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-02-permission.jpg" alt="STEP 02 필수 권한 안내 화면" loading="lazy" /><figcaption><span class="step">STEP 02</span> 필수 권한 안내</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-03-uploading.jpg" alt="STEP 03 업로드 진행 화면" loading="lazy" /><figcaption><span class="step">STEP 03</span> 업로드 진행 표시</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-04-record-start.jpg" alt="STEP 04 녹음시작 화면" loading="lazy" /><figcaption><span class="step">STEP 04</span> 녹음시작 화면</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-05-permission-error.jpg" alt="STEP 05 권한 미허용 안내 화면" loading="lazy" /><figcaption><span class="step">STEP 05</span> 권한 미허용 예외</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-06-fail-list.jpg" alt="STEP 06 최근회의록 실패 목록 화면" loading="lazy" /><figcaption><span class="step">STEP 06</span> 최근회의록/실패목록</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-07-retry-done.jpg" alt="STEP 07 재전송 완료 토스트 화면" loading="lazy" /><figcaption><span class="step">STEP 07</span> 재전송 완료 알림</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-08-recording.jpg" alt="STEP 08 녹음중 화면" loading="lazy" /><figcaption><span class="step">STEP 08</span> 녹음중</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-09-paused.jpg" alt="STEP 09 일시정지 화면" loading="lazy" /><figcaption><span class="step">STEP 09</span> 일시정지</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-10-file-edit.jpg" alt="STEP 10 파일명 수정 화면" loading="lazy" /><figcaption><span class="step">STEP 10</span> 파일명 수정/저장</figcaption></figure>
+        <figure class="shot"><img src="./assets/flow-11-stop-confirm.jpg" alt="STEP 11 녹음 종료 확인 모달" loading="lazy" /><figcaption><span class="step">STEP 11</span> 종료 확인 모달</figcaption></figure>
       </div>
       <div class="warn"><strong>운영 포인트:</strong> 권한 미허용·업로드 실패·실수 종료 같은 현장 이슈를 사전 안내해 교육 비용을 줄일 수 있습니다.</div>
     </section>
